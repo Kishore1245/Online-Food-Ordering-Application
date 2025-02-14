@@ -49,16 +49,16 @@ The **Online Food Ordering Application** is a web-based platform designed for re
 ![Home Page Screenshot](images/ProjectImage/Screenshot1.png)
 
 ### Restaurant Owner Page View
-[Restaurant Owner Page Screenshot](images/ProjectImage/Screenshot2.png)
+![Restaurant Owner Page Screenshot](images/ProjectImage/Screenshot2.png)
 
 ### Customer Page View
-[Customer Page Screenshot](images/ProjectImage/Screenshot3.png)
+![Customer Page Screenshot](images/ProjectImage/Screenshot3.png)
 
 ### Cart & Bill Page View
-[Cart & Bill Page Screenshot](images/ProjectImage/Screenshot4.png)
+![Cart & Bill Page Screenshot](images/ProjectImage/Screenshot4.png)
 
 ### Stripe Payment Page View
-[Stripe Payment Page Screenshot](images/ProjectImage/Screenshot5.png)
+![Stripe Payment Page Screenshot](images/ProjectImage/Screenshot5.png)
 
 ## 📜 License
 This project is open-source under the [MIT License](LICENSE).
