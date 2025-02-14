@@ -1,0 +1,30 @@
+package com.FOP.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.stripe.exception.StripeException;
+import com.FOP.model.PaymentResponse;
+import com.FOP.service.PaymentService;
+
+@RestController
+@RequestMapping("/api/payment") // Base path for payment APIs
+public class PaymentController {
+    
+    @Autowired
+    private PaymentService paymentService;
+
+    @PostMapping("/{orderId}")
+    public ResponseEntity<?> generatePaymentLink(@PathVariable Long orderId) {
+        try {
+            PaymentResponse res = paymentService.generatePaymentLink(orderId);
+            return ResponseEntity.status(HttpStatus.OK).body(res);
+        } catch (StripeException e) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Payment processing error: " + e.getMessage());
+        }
+    }
+}

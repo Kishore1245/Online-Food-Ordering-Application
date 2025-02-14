@@ -1,0 +1,61 @@
+package com.FOP.service;
+
+import com.FOP.model.Order;
+import com.FOP.model.PaymentResponse;
+import com.stripe.exception.StripeException;
+import com.stripe.model.checkout.Session;
+import com.stripe.param.checkout.SessionCreateParams;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+public class PaymentServiceImplementation implements PaymentService {
+
+    @Value("${stripe.api.key}")
+    private String stripeSecretKey;
+
+    @PostConstruct
+    public void init() {
+        com.stripe.Stripe.apiKey = stripeSecretKey;
+    }
+
+    public PaymentResponse generatePaymentLink(Order order) throws StripeException {
+        SessionCreateParams params = SessionCreateParams.builder()
+                .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+                .setMode(SessionCreateParams.Mode.PAYMENT)
+                .setSuccessUrl("https://localhost:3001/payment/success/" + order.getId())
+                .setCancelUrl("https://localhost:3001/cancel")
+                .addLineItem(SessionCreateParams.LineItem.builder()
+                        .setQuantity(1L)
+                        .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                .setCurrency("INR")
+                                .setUnitAmount((long) order.getTotalAmount() * 100)
+                                .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                        .setName(order.getName())
+                                        .build())
+                                .build())
+                        .build())
+                .build();
+
+        Session session = Session.create(params);
+        PaymentResponse res = new PaymentResponse();
+        res.setPayment_url(session.getUrl());
+        return res;
+    }
+
+    @Override
+    public PaymentResponse generatePaymentLink(Long orderId) {
+        throw new UnsupportedOperationException("This method is not implemented yet.");
+    }
+
+	@Override
+	public PaymentResponse generatePaymentLink1(Order order) throws StripeException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
