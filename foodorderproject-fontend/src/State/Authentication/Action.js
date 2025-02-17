@@ -149,5 +149,19 @@ export const logout = () => {
   };
 };
 
+// Renamed action for sending reset password email
+export const sendResetPasswordEmail = (email) => async (dispatch) => {
+  dispatch({ type: REQUEST_RESET_PASSWORD_REQUEST });
+  try {
+    const { data } = await axios.post(`${API_URL}/auth/reset-password-request?email=${email}`, {});
+
+    console.log("reset password -: ", data);
+
+    dispatch({ type: REQUEST_RESET_PASSWORD_SUCCESS, payload: data });
+  } catch (error) {
+    console.log("error ", error);
+    dispatch({ type: REQUEST_RESET_PASSWORD_FAILURE, payload: error.message });
+  }
+};
 
 

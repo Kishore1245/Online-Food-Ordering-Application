@@ -295,21 +295,7 @@ const AddMenuForm = () => {
                   </Select>
                 </FormControl>
               </Grid>
-              {/* <Grid item xs={6}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel htmlFor="isVegan">Is Vegan</InputLabel>
-                <Select
-                  id="isVegan"
-                  name="isVegan"
-                  label="Is Vegan"
-                  onChange={formik.handleChange}
-                  value={formik.values.isVegan}
-                >
-                  <MenuItem value={true}>Yes</MenuItem>
-                  <MenuItem value={false}>No</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid> */}
+              
             </Grid>
             <Button variant="contained" color="primary" type="submit">
               Create Menu Item

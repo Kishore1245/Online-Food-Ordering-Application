@@ -54,11 +54,6 @@ const MenuItemTable = ({ isDashboard, name }) => {
     
   }, [ingredients.update,restaurant.usersRestaurant]);
 
-  // console.log(
-  //   "-------- ",
-  //   menu.menuItems[1].ingredients,
-  //   categorizedIngredients(menu.menuItems[1].ingredients)
-  // );
 
   
 

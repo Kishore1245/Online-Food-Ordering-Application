@@ -42,10 +42,10 @@ const PaymentSuccess = () => {
           <p className="py-2 text-center text-gray-200 text-lg">
             Have A Great Day!
           </p>
-          <p className="py-2 text-center text-sm text-gray-400">
+          {/* <p className="py-2 text-center text-sm text-gray-400">
             Redirecting to home page...
           </p>
-          {loading && <CircularProgress sx={{ color: green[600], margin: "1rem 0" }} />}
+          {loading && <CircularProgress sx={{ color: green[600], margin: "1rem 0" }} />} */}
           <Button
             variant="contained"
             className="my-5"

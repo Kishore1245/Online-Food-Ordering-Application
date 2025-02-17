@@ -31,7 +31,7 @@ public class PaymentServiceImplementation implements PaymentService{
 	        SessionCreateParams params = SessionCreateParams.builder()
 	                .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
 	                .setMode(SessionCreateParams.Mode.PAYMENT)
-	                .setSuccessUrl("https://kishoreprojects.netlify.app/payment/success/"+order.getId())
+	                .setSuccessUrl("http://localhost:3000/payment/success/"+order.getId())
 	                .setCancelUrl("http://localhost:3000/cancel")
 
 	                .addLineItem(SessionCreateParams.LineItem.builder()
@@ -40,7 +40,7 @@ public class PaymentServiceImplementation implements PaymentService{
 	                                .setCurrency("usd")
 	                                .setUnitAmount((long) order.getTotalAmount()*100) // Specify the order amount in cents
 	                                .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
-	                                        .setName("pizza burger")
+	                                        .setName("Your Payment")
 	                                        .build())
 	                                .build())
 	                        .build())

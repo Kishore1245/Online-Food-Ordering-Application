@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Button, makeStyles, Card, Modal, Box } from "@mui/material";
-import { Create } from "@mui/icons-material";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createCategoryAction } from "../../State/Customers/Restaurant/restaurant.action";
 import { createIngredientCategory } from "../../State/Admin/Ingredients/Action";
 
 

@@ -1,91 +1,59 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {
-  Button,
-  TextField,
-  Typography,
-  CssBaseline,
-  Container,
-  Backdrop,
-  CircularProgress,
-} from "@mui/material";
+import { Button, TextField, Container, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import resetPasswordRequest from "./ResetPasswordForm";
+import { useDispatch } from "react-redux";
+import { sendResetPasswordEmail } from "../../State/Authentication/Action";
 
-const initialValues = {
-  email: "",
-};
-
-const validationSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email format")
-    .required("Email is required"),
+const validationSchemaForgot = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Required"),
 });
 
-const ResetPasswordRequest = () => {
+const ForgotPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { auth } = useSelector((store) => store);
 
-  const handleSubmit = (values) => {
-    // You can handle password reset submission here, e.g., send data to your server
-    console.log("Reset password request form values:", values);
-    dispatch(resetPasswordRequest(values.email));
-    navigate("/next-page"); 
-
+  const handleSubmit = (values, { setSubmitting }) => {
+    dispatch(sendResetPasswordEmail(values.email))
+      .then(() => {
+        navigate("/reset-password-message");
+      })
+      .finally(() => setSubmitting(false));
   };
 
   return (
-    <>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div>
-          <Typography className="text-center" variant="h5">
-            Forgot Password
-          </Typography>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            <Form>
-              <Field
-                as={TextField}
-                variant="outlined"
-                margin="normal"
-                fullWidth
-                label="Email Address"
-                name="email"
-                id="email"
-                autoComplete="email"
-                helperText={<ErrorMessage name="email" />}
-                error={false} // You can customize error state here
-              />
-              <ErrorMessage name="email" component="div" className="error" />
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2, padding: "1rem" }}
-              >
-                Send Reset Password Link
-              </Button>
-            </Form>
-          </Formik>
-        </div>
-      </Container>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={auth.isLoading}
+    <Container maxWidth="sm">
+      <Typography variant="h5" textAlign="center">Forgot Password</Typography>
+      <Formik
+        initialValues={{ email: "" }}
+        validationSchema={validationSchemaForgot}
+        onSubmit={handleSubmit}
       >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </>
+        {({ isSubmitting }) => (
+          <Form>
+            <Field
+              as={TextField}
+              name="email"
+              label="Email Address"
+              fullWidth
+              margin="normal"
+              helperText={<ErrorMessage name="email" />}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Sending..." : "Send Reset Link"}
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </Container>
   );
 };
 
-export default ResetPasswordRequest;
+export default ForgotPassword;

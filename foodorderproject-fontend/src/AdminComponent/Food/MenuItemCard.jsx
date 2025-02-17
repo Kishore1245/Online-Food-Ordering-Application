@@ -49,26 +49,7 @@ const MenuItemCard = ({ item }) => {
 
   return (
     <>
-      {/* <div className="lg:flex items-center justify-between box">
-      <div className="lg:flex items-center lg:space-x-5">
-        <img
-          className="w-[7rem] h-[7rem] object-cover"
-          src={item.imageUrl}
-          alt=""
-        />
-
-        <div className="space-y-1 lg:space-y-5 lg:max-w-2xl">
-          <p className="font-semibold text-xl">{item.name}</p>
-          <p>₹{item.price}</p>
-          <p className="text-gray-400">{item.description}</p>
-        </div>
-      </div>
-      <div>
-        <Button onClick={handleAddItemToCart}>Add To Cart</Button>
-      </div>
-
-     
-    </div> */}
+      
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -89,9 +70,7 @@ const MenuItemCard = ({ item }) => {
                 <p className="text-gray-400">{item.description}</p>
               </div>
             </div>
-            {/* <div>
-        <Button onClick={handleAddItemToCart}>Add To Cart</Button>
-      </div> */}
+            
           </div>
         </AccordionSummary>
         <AccordionDetails>

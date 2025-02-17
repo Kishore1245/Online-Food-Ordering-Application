@@ -17,6 +17,10 @@ public interface UserService {
 
 	void updatePassword(User user, String newPassword);
 
+	void sendPasswordResetEmail(String email);
+
+	public void sendPasswordResetEmail(String userEmail, String resetPasswordUrl);
+
 	void sendPasswordResetEmail(User user);
 
 }

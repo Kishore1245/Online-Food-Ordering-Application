@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import IngredientTable from "../Events/Events";
 import Category from "../Category/Category";
 import Ingredients from "../Ingredients/Ingredients";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,7 +21,7 @@ const Admin = () => {
   const [openSideBar, setOpenSideBar] = useState(false);
   const handleOpenSideBar = () => setOpenSideBar(true);
   const handleCloseSideBar = () => setOpenSideBar(false);
-  const { auth, restaurant, ingredients } = useSelector((store) => store);
+  const { auth, restaurant } = useSelector((store) => store);
   const jwt = localStorage.getItem("jwt");
   useEffect(() => {
     if (restaurant.usersRestaurant) {
@@ -62,7 +61,6 @@ const Admin = () => {
             <Route path="/menu" element={<RestaurantsMenu />} />
             <Route path="/add-menu" element={<AddMenuForm />} />
             <Route path="/add-restaurant" element={<CreateRestaurantForm />} />
-            <Route path="/event" element={<IngredientTable />} />
             <Route path="/ingredients" element={<Ingredients />} />
             <Route path="/category" element={<Category />} />
             <Route path="/details" element={<Details />} />

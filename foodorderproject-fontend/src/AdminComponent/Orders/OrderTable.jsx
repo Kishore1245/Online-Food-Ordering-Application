@@ -16,7 +16,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from "@mui/material";
 
 import React, { useState } from "react";
@@ -197,19 +196,7 @@ const OrdersTable = ({ isDashboard, name }) => {
                         </div>
                       </TableCell>
                     )}
-                    {/* {!isDashboard && (
-                    <TableCell
-                      sx={{ textAlign: "center" }}
-                      className="text-white"
-                    >
-                      <Button
-                        onClick={() => handleDeleteOrder(item._id)}
-                        variant="text"
-                      >
-                        delete
-                      </Button>
-                    </TableCell>
-                  )} */}
+                    
                   </TableRow>
                 ))}
             </TableBody>

@@ -124,6 +124,18 @@ public class UserServiceImplementation implements UserService {
 		throw new UserException("user not exist with username "+username);
 	}
 
+	@Override
+	public void sendPasswordResetEmail(String email) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void sendPasswordResetEmail(String userEmail, String resetPasswordUrl) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }

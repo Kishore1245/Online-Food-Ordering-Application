@@ -6,7 +6,7 @@ import menuItemReducer from "../Customers/Menu/Reducer";
 import cartReducer from "../Customers/Cart/Reducer";
 import { orderReducer } from "../Customers/Orders/orderReducer";
 import restaurantsOrderReducer from "../Admin/Order/restaurants.order.reducer";
-import superAdminReducer from "../SuperAdmin/superAdmin.reducer";
+//import superAdminReducer from "../SuperAdmin/superAdmin.reducer";
 import { ingredientReducer } from "../Admin/Ingredients/Reducer";
 
 
@@ -24,7 +24,7 @@ const rootReducer=combineReducers({
     ingredients:ingredientReducer,
 
     // super admin
-    superAdmin:superAdminReducer
+    //superAdmin:superAdminReducer
 })
 
 export const store=legacy_createStore(rootReducer,applyMiddleware(thunk))

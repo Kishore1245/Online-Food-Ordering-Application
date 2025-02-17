@@ -1,90 +1,75 @@
 import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { TextField, Button } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Button, TextField, Container, Typography } from "@mui/material";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetPassword } from "../../State/Authentication/Action";
 
-const validationSchema = Yup.object().shape({
-  password: Yup.string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+const validationSchemaReset = Yup.object().shape({
+  password: Yup.string().min(6, "At least 6 characters").required("Required"),
   confirmedPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirmed password is required"),
+    .required("Required"),
 });
 
-function ResetPasswordForm() {
+const ResetPassword = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get("token");
 
-  const initialValues = {
-    password: "",
-    confirmedPassword: "",
-  };
-
   const handleSubmit = (values, { setSubmitting }) => {
-    // Handle form submission here
-    const data = { password: values.password, token };
-    dispatch(resetPassword({ navigate, data })).then(() => {
-      setSubmitting(false);
-    }).catch(() => {
-      setSubmitting(false);
-    });
+    dispatch(resetPassword({ password: values.password, token }))
+      .then(() => {
+        navigate("/login");
+      })
+      .finally(() => setSubmitting(false));
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form className="space-y-5">
-          <div className="space-y-5">
-            <div>
-              <Field
-                as={TextField}
-                name="password"
-                placeholder="Password"
-                type="password"
-                variant="outlined"
-                fullWidth
-                helperText={<ErrorMessage name="password" />}
-                error={false} // You can customize this based on error state
-              />
-            </div>
-            <div>
-              <Field
-                as={TextField}
-                name="confirmedPassword"
-                placeholder="Confirmed Password"
-                type="password"
-                variant="outlined"
-                fullWidth
-                helperText={<ErrorMessage name="confirmedPassword" />}
-                error={false}
-              />
-            </div>
-          </div>
-          <Button
-            sx={{ padding: ".8rem 0rem" }}
-            fullWidth
-            type="submit"
-            variant="contained"
-            color="primary"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Resetting..." : "Reset Password"}
-          </Button>
-        </Form>
-      )}
-    </Formik>
+    <Container maxWidth="sm">
+      <Typography variant="h5" textAlign="center">Reset Password</Typography>
+      <Formik
+        initialValues={{ password: "", confirmedPassword: "" }}
+        validationSchema={validationSchemaReset}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <Field
+              as={TextField}
+              name="password"
+              type="password"
+              label="New Password"
+              fullWidth
+              margin="normal"
+              helperText={<ErrorMessage name="password" />}
+            />
+            <Field
+              as={TextField}
+              name="confirmedPassword"
+              type="password"
+              label="Confirm Password"
+              fullWidth
+              margin="normal"
+              helperText={<ErrorMessage name="confirmedPassword" />}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Resetting..." : "Reset Password"}
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </Container>
   );
-}
+};
 
-export default ResetPasswordForm;
+export default ResetPassword;

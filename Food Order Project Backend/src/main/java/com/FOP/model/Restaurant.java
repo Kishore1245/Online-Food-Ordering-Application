@@ -36,9 +36,9 @@ public class Restaurant {
     
     private String openingHours;
     
-    @JsonIgnore
-    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Review>reviews=new ArrayList<>();
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,orphanRemoval = true)
+//    private List<Review>reviews=new ArrayList<>();
     
     @JsonIgnore
     @OneToMany(mappedBy="restaurant",cascade=CascadeType.ALL,orphanRemoval = true)
@@ -122,13 +122,13 @@ public class Restaurant {
 		this.openingHours = openingHours;
 	}
 
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
+//	public List<Review> getReviews() {
+//		return reviews;
+//	}
+//
+//	public void setReviews(List<Review> reviews) {
+//		this.reviews = reviews;
+//	}
 
 	public List<Order> getOrders() {
 		return orders;
