@@ -47,8 +47,9 @@ public class AppConfig {
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration cfg = new CorsConfiguration();
                 cfg.setAllowedOrigins(Arrays.asList(
-                    "http://localhost:3000"
-                    
+                    "http://localhost:3000",
+                    "https://localhost:3000",
+                    "http://localhost:4200"
                 ));
                 cfg.setAllowedMethods(Collections.singletonList("*"));
                 cfg.setAllowCredentials(true);
@@ -59,7 +60,6 @@ public class AppConfig {
             }
         };
     }
-
 
     @Bean
     PasswordEncoder passwordEncoder() {

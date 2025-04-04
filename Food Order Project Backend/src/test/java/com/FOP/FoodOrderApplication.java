@@ -1,13 +1,15 @@
-package com.zosh;
+package com.FOP;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZoshFoodApplicationTests {
+class FoodOrderApplication {
 
 	@Test
 	void contextLoads() {
 	}
 
 }
+
+

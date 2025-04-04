@@ -52,7 +52,6 @@ INDEX VERSION 1.134+D:\Online Food Ordering Project\Source\.metadata\.plugins\or
 584091994.index
 701734102.index
 3644909828.index
-2222682220.index
 3427063244.index
 600005261.index
 3027758053.index
